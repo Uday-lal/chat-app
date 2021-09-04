@@ -1,0 +1,99 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Varela Round', sans-serif;
+	overflow: hidden;
+}
+
+div.grid {
+	width: 100vw;
+	display: grid;
+	grid-template-columns: 25% 80%;
+	overflow: hidden;
+}
+
+
+div#connection-info {
+	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	height: 100vh;
+}
+
+div#chat-container {
+	background-color: black;
+	position: relative;
+}
+
+
+div#chat-container > input {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	padding: 15px;
+	border: none;
+	outline: none;
+}
+
+
+nav {
+	background: linear-gradient(90deg, #2C353E 0%, #8733A5 99.27%);
+}
+
+.nav-content {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+nav > .nav-content > h1 {
+	padding: 20px;
+	color: ghostwhite;
+	font-weight: normal;
+}
+
+ul {
+	display: flex;
+}
+
+li {
+	list-style: none;
+	color: ghostwhite;
+	padding: 20px;
+}
+
+li > a {
+	color: ghostwhite;
+	text-decoration: none;
+}
+
+div#number-of-people {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+div#number-of-people > span {
+	color: ghostwhite;
+}
+
+div#connection-info {
+	background: linear-gradient(180deg, #2C353E 0%, #8733A5 100%);
+	mix-blend-mode: normal
+}
+
+ul#peoples {
+	display: flex;
+	flex-direction: column;
+}
+
+div.peoples {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+li.people {
+	cursor: pointer;
+}

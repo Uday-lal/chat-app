@@ -25,3 +25,20 @@ div.card {
     width: 400px;
     height: 400px;
 }
+
+div#chat-container {
+    background-color: lightgrey;
+    height: 80vh;
+    position: relative; 
+    border-radius: 20px;
+    margin-top: 40px;
+}
+
+div.messages-form {
+    position: relative; 
+}
+
+input.form-control {
+    margin: 0px;
+    border: none;
+}

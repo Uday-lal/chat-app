@@ -16,4 +16,4 @@ def home():
 
 @views.route("/chat")
 def chat():
-	return "Chat page"
+	return render_template("chat.html")
