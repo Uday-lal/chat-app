@@ -97,3 +97,43 @@ div.peoples {
 li.people {
 	cursor: pointer;
 }
+
+div#messages {
+	width: 100%;
+}
+
+div.send-message {
+	background-color: #8733A5;
+	text-align: right;
+}
+
+div.receive-message {
+	background-color: #2C353E;
+	text-align: left;
+}
+
+div.message {
+	color: ghostwhite;
+	width: 90%;
+	margin: 10px 10px;
+	padding: 10px;
+	border-radius: 20px;
+}
+
+div.message > div {
+	margin: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+span.msg {
+	font-size: 20px;
+}
+
+span.username {
+	font-weight: bold;
+}
+
+span.date {
+	font-size: 12px;
+}
