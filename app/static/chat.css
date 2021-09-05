@@ -23,6 +23,10 @@ div#connection-info {
 div#chat-container {
 	background-color: black;
 	position: relative;
+	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	height: 85vh;
 }
 
 
@@ -127,7 +131,8 @@ div.message > div {
 }
 
 span.msg {
-	font-size: 20px;
+	font-size: 18px;
+	width: 50%;
 }
 
 span.username {
