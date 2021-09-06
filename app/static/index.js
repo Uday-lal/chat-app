@@ -6,7 +6,7 @@ let username;
 
 function getTime() {
   const hours = date.getHours();
-  const minutes = date.getMinutes();
+  const minutes = date.getMinutes() < 10 ? "00" : date.getMinutes();
   const time = `${hours}:${minutes}`;
   return time;
 }
@@ -18,7 +18,7 @@ function getDate() {
   return `${day}/${month}/${year}`;
 }
 
-function createSendMessageBubble(messageData) {
+function createMessageBubble(messageData, isSender) {
   const msg = document.createElement("DIV");
   const msgHeader = document.createElement("DIV");
   const msgBody = document.createElement("DIV");
@@ -26,7 +26,7 @@ function createSendMessageBubble(messageData) {
   const date = document.createElement("SPAN");
   const usernameSpan = document.createElement("SPAN");
   const message = document.createElement("SPAN");
-  msg.className = "send-message message";
+  msg.className = isSender ? "send-message message" : "receive-message message";
   msgHeader.className = "msg-header";
   msgBody.className = "msg-body";
 
@@ -36,16 +36,26 @@ function createSendMessageBubble(messageData) {
   usernameSpan.className = "username";
   usernameSpan.innerHTML =
     messageData.username === username ? "You" : messageData.username;
-  msgHeader.appendChild(time);
-  msgHeader.appendChild(usernameSpan);
+  if (isSender) {
+    msgHeader.appendChild(time);
+    msgHeader.appendChild(usernameSpan);
+  } else {
+    msgHeader.appendChild(usernameSpan);
+    msgHeader.appendChild(time);
+  }
 
   // Setting body properties
   date.className = "date";
   date.innerHTML = messageData.date === getDate() ? "Today" : messageData.date;
   message.className = "msg";
   message.innerHTML = messageData.message;
-  msgBody.appendChild(date);
-  msgBody.appendChild(message);
+  if (isSender) {
+    msgBody.appendChild(date);
+    msgBody.appendChild(message);
+  } else {
+    msgBody.appendChild(message);
+    msgBody.appendChild(date);
+  }
 
   // Setting message properties
   msg.appendChild(msgHeader);
@@ -55,12 +65,12 @@ function createSendMessageBubble(messageData) {
   return msg;
 }
 
-function createReceiveMessageBubble(messageData) {
-  // ...
-}
-
 socket.on("receive", (data) => {
-  console.log(data);
+  const senderName = data.username;
+  if (senderName !== username) {
+    const messageBubble = createMessageBubble(data, false);
+    messages.appendChild(messageBubble);
+  }
 });
 
 socket.on("connect", () => {
@@ -88,7 +98,7 @@ document.addEventListener("keyup", (event) => {
       time: time,
       date: date,
     };
-    const sendMessageBubble = createSendMessageBubble(msgData);
+    const sendMessageBubble = createMessageBubble(msgData, true);
     socket.emit("message", msgData);
     chat_box.value = "";
     messages.appendChild(sendMessageBubble);
