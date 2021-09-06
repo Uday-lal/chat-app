@@ -7,6 +7,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 	<title>Chat App</title>
 </head>
 <body>
@@ -61,8 +62,9 @@
 					</div>
 				</div>
 			</div>
-			<input type="text" name="chat-box" placeholder="Type a message" />
+			<input type="text" name="chat-box" placeholder="Type a message" id="chat-box" />
 		</div>
 	</div>
+	<script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>
