@@ -1,6 +1,7 @@
 const socket = io();
 const chat_box = document.getElementById("chat-box");
 const messages = document.getElementById("messages");
+const peoples = document.getElementById("peoples");
 const date = new Date();
 let username;
 
@@ -65,6 +66,13 @@ function createMessageBubble(messageData, isSender) {
   return msg;
 }
 
+function insertPeoples(user_data) {
+  const li = document.createElement("LI");
+  li.className = "people";
+  li.innerHTML = user_data.username;
+  peoples.appendChild(li);
+}
+
 socket.on("receive", (data) => {
   const senderName = data.username;
   if (senderName !== username) {
@@ -78,8 +86,12 @@ socket.on("connect", () => {
 });
 
 socket.on("connection_details", (user_data) => {
+  // Get the details of users that are connected to the server
   if (!username) {
     username = user_data.username;
+    insertPeoples(user_data);
+  } else {
+    insertPeoples(user_data);
   }
 });
 
