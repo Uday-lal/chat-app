@@ -1,5 +1,6 @@
 const socket = io();
-const chat_box = document.getElementById("chat-box");
+const chatBox = document.getElementById("chat-box");
+const sendButton = document.getElementById("send");
 const messages = document.getElementById("messages");
 const peoples = document.getElementById("peoples");
 const date = new Date();
@@ -68,7 +69,9 @@ function createMessageBubble(messageData, isSender) {
 
 function insertPeoples(user_data) {
   const li = document.createElement("LI");
+  const connectedUsers = document.getElementById("connected-users");
   li.className = "people";
+  connectedUsers.innerHTML = `${user_data.connected_users} people connected`;
   li.innerHTML = user_data.username;
   peoples.appendChild(li);
 }
@@ -89,8 +92,11 @@ socket.on("connection_details", (user_data) => {
   // Get the details of users that are connected to the server
   if (!username) {
     username = user_data.username;
-    insertPeoples(user_data);
-  } else {
+  }
+});
+
+socket.on("connection_state", (user_data) => {
+  if (user_data.username !== username) {
     insertPeoples(user_data);
   }
 });
@@ -99,9 +105,11 @@ socket.on("disconnect", () => {
   socket.emit("disconnection");
 });
 
-document.addEventListener("keyup", (event) => {
-  const message = chat_box.value;
-  if (event.keyCode === 13 && message) {
+sendButton.onclick = () => {
+  const message = chatBox.value;
+  sendButton.className = "button-click";
+  console.log("working");
+  if (message) {
     const time = getTime();
     const date = getDate();
     const msgData = {
@@ -112,7 +120,25 @@ document.addEventListener("keyup", (event) => {
     };
     const sendMessageBubble = createMessageBubble(msgData, true);
     socket.emit("message", msgData);
-    chat_box.value = "";
+    chatBox.value = "";
     messages.appendChild(sendMessageBubble);
   }
-});
+};
+
+// document.addEventListener("keyup", (event) => {
+//   const message = chatBox.value;
+//   if (event.keyCode === 13 && message) {
+//     const time = getTime();
+//     const date = getDate();
+//     const msgData = {
+//       message: message,
+//       username: username,
+//       time: time,
+//       date: date,
+//     };
+//     const sendMessageBubble = createMessageBubble(msgData, true);
+//     socket.emit("message", msgData);
+//     chatBox.value = "";
+//     messages.appendChild(sendMessageBubble);
+//   }
+// });

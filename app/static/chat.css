@@ -25,16 +25,7 @@ div#chat-container {
   overflow: scroll;
   /* overflow-x: hidden; */
   overflow-y: scroll;
-  height: 85vh;
-}
-
-div#chat-container > input {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  padding: 15px;
-  border: none;
-  outline: none;
+  height: 86vh;
 }
 
 nav {
@@ -138,4 +129,32 @@ span.username {
 
 span.date {
   font-size: 12px;
+}
+
+#chat-box-container {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  background-color: black;
+  width: 75%;
+  justify-content: center;
+  align-items: center;
+}
+
+#chat-box-container > input {
+  padding: 15px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+#chat-box-container > button {
+  transition: 0.3s ease;
+  background-color: #8733a5;
+  padding: 15px;
+  width: 15%;
+  color: ghostwhite;
+  border: none;
+  cursor: pointer;
+  text-align: center;
 }

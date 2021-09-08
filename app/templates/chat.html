@@ -35,21 +35,31 @@
     <div class="grid">
       <div id="connection-info">
         <div id="number-of-people">
-          <span>10 people connected</span>
+          <span id="connected-users"
+            >{{ connected_users }} people connected</span
+          >
         </div>
         <hr />
         <div class="peoples">
-          <ul id="peoples"></ul>
+          <ul id="peoples">
+            {% for people in peoples %}
+            <li class="people">{{ people }}</li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
       <div id="chat-container">
         <div id="messages"></div>
-        <input
-          type="text"
-          name="chat-box"
-          placeholder="Type a message"
-          id="chat-box"
-        />
+        <div id="chat-box-container">
+          <input
+            type="text"
+            name="chat-box"
+            placeholder="Type a message"
+            aria-multiline="true"
+            id="chat-box"
+          />
+          <button id="send">Send</button>
+        </div>
       </div>
     </div>
     <script
