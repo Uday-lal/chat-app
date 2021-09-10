@@ -124,21 +124,3 @@ sendButton.onclick = () => {
     messages.appendChild(sendMessageBubble);
   }
 };
-
-// document.addEventListener("keyup", (event) => {
-//   const message = chatBox.value;
-//   if (event.keyCode === 13 && message) {
-//     const time = getTime();
-//     const date = getDate();
-//     const msgData = {
-//       message: message,
-//       username: username,
-//       time: time,
-//       date: date,
-//     };
-//     const sendMessageBubble = createMessageBubble(msgData, true);
-//     socket.emit("message", msgData);
-//     chatBox.value = "";
-//     messages.appendChild(sendMessageBubble);
-//   }
-// });

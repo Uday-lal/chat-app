@@ -121,6 +121,7 @@ div.message > div {
 span.msg {
   font-size: 18px;
   width: 50%;
+  word-wrap: break-word;
 }
 
 span.username {
