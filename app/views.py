@@ -31,13 +31,19 @@ def chat():
 
 @SOCKET_IO.on("message")
 def handle_messages(data):
-    print(data)
     emit("receive", data, broadcast=True)
 
 
-@SOCKET_IO.on("disconnection")
+@SOCKET_IO.on("disconnect")
 def handle_disconnect():
-    print("disconnection happen")
+    disconnected_user = session["username"]
+    connected_users.remove(disconnected_user)
+    emit("connection_state", {
+        "event": "disconnect",
+        "username": disconnected_user,
+        "connected_users": len(connected_users)
+    },
+         broadcast=True)
 
 
 @SOCKET_IO.on("connection")
@@ -45,6 +51,7 @@ def handle_connect():
     username = session["username"]
     emit("connection_details", {"username": username})
     emit("connection_state", {
+        "event": "connect",
         "username": username,
         "connected_users": len(connected_users)
     },

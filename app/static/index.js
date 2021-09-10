@@ -71,9 +71,19 @@ function insertPeoples(user_data) {
   const li = document.createElement("LI");
   const connectedUsers = document.getElementById("connected-users");
   li.className = "people";
+  li.id = user_data.username;
   connectedUsers.innerHTML = `${user_data.connected_users} people connected`;
   li.innerHTML = user_data.username;
   peoples.appendChild(li);
+}
+
+function deletePeople(disconnection_data) {
+  const peoples = document.getElementById("peoples");
+  const connectedUsers = document.getElementById("connected-users");
+  const disconnectedUser = disconnection_data.username;
+  const disconnectUserNode = document.getElementById(disconnectedUser);
+  peoples.removeChild(disconnectUserNode);
+  connectedUsers.innerHTML = `${disconnection_data.connected_users} peoples connected`;
 }
 
 socket.on("receive", (data) => {
@@ -95,20 +105,20 @@ socket.on("connection_details", (user_data) => {
   }
 });
 
-socket.on("connection_state", (user_data) => {
-  if (user_data.username !== username) {
-    insertPeoples(user_data);
+socket.on("connection_state", (connection_data) => {
+  const event = connection_data.event;
+  if (event === "connect") {
+    if (connection_data.username !== username) {
+      insertPeoples(connection_data); // Insert connected users to the ui
+    }
+  } else if (event === "disconnect") {
+    deletePeople(connection_data); // Delete connected users to the ui
   }
-});
-
-socket.on("disconnect", () => {
-  socket.emit("disconnection");
 });
 
 sendButton.onclick = () => {
   const message = chatBox.value;
   sendButton.className = "button-click";
-  console.log("working");
   if (message) {
     const time = getTime();
     const date = getDate();
