@@ -9,3 +9,6 @@ __pycache__
 
 # .vscode
 .vscode
+
+# Database file
+chat.db

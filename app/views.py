@@ -3,6 +3,8 @@ from .form import EnterForm
 from . import SOCKET_IO
 from flask_socketio import emit
 from flask import flash
+from .model import Chat
+from . import DB
 
 views = Blueprint("views", __name__)
 connected_users = []
@@ -31,6 +33,11 @@ def chat():
 
 @SOCKET_IO.on("message")
 def handle_messages(data):
+    username = data["username"]
+    message = data["message"]
+    chat = Chat(username=username, message=message)
+    DB.session.add(chat)
+    DB.session.commit()
     emit("receive", data, broadcast=True)
 
 
