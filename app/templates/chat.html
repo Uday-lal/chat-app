@@ -23,11 +23,13 @@
   <body>
     <nav class="navbar">
       <div class="nav-content">
-        <h1>Chat App</h1>
-        <ul>
-          <li>
-            <a href="{{ url_for('views.home') }}">Login</a>
-          </li>
+        <div>
+          <h1>Chat App</h1>
+          <span>{{ connected_users }} people connected</span>
+        </div>
+        <span id="clear">Clear</span>
+        <ul id="nav-links">
+          <li id="show-peoples"><span>Show Peoples</span></li>
           <li><a href="#">Logout</a></li>
         </ul>
       </div>

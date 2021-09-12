@@ -1,44 +1,54 @@
 * {
-    padding: 0px;
-    margin: 0px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
 }
 
 div.center-container {
-    display: flex;
-    padding: 10px;
-    height: 100vh;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  padding: 10px;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 input#username {
-	width: 500px;
+  width: 500px;
 }
 
 div.card {
-	background-color: lightgrey;
-	border: 1px solid rgb(103 98 98 / 48%);
+  background-color: lightgrey;
+  border: 1px solid rgb(103 98 98 / 48%);
 }
 
 .chat-img {
-    width: 400px;
-    height: 400px;
+  width: 50%;
+  height: 50%;
+  margin: 15px;
 }
 
 div#chat-container {
-    background-color: lightgrey;
-    height: 80vh;
-    position: relative; 
-    border-radius: 20px;
-    margin-top: 40px;
+  background-color: lightgrey;
+  height: 80vh;
+  position: relative;
+  border-radius: 20px;
+  margin-top: 40px;
 }
 
 div.messages-form {
-    position: relative; 
+  position: relative;
 }
 
 input.form-control {
+  margin: 0px;
+  display: inline;
+}
+/* 
+@media (max-width: 648px) {
+  input.form-control {
     margin: 0px;
     border: none;
-}
+    width: ;
+  }
+} */

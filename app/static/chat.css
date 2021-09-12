@@ -12,6 +12,10 @@ div.grid {
   overflow: hidden;
 }
 
+span#clear {
+  display: none;
+}
+
 div#connection-info {
   overflow: scroll;
   overflow-x: hidden;
@@ -37,10 +41,15 @@ nav {
   align-items: center;
 }
 
-nav > .nav-content > h1 {
+nav > .nav-content > div > h1 {
   padding: 20px;
   color: ghostwhite;
   font-weight: normal;
+}
+
+nav > .nav-content > div > span {
+  display: none;
+  color: ghostwhite;
 }
 
 ul {
@@ -157,4 +166,72 @@ span.date {
   border: none;
   cursor: pointer;
   text-align: center;
+}
+
+li#show-peoples {
+  display: none;
+}
+
+@media (max-width: 765px) {
+  div#connection-info {
+    display: none;
+  }
+
+  li#show-peoples {
+    display: block;
+    color: ghostwhite;
+  }
+
+  div.grid {
+    display: block;
+    width: 100vw;
+  }
+
+  div#chat-container {
+    width: 100%;
+  }
+
+  #chat-box-container {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  nav > .nav-content > div > span {
+    display: block;
+    color: ghostwhite;
+    font-size: 10px;
+  }
+
+  nav > .nav-content > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  nav > .nav-content > div > h1 {
+    color: ghostwhite;
+    font-weight: normal;
+    padding: 10px;
+  }
+
+  ul#nav-links {
+    transition: all 2s linear;
+  }
+
+  ul.hidden {
+    display: none;
+    opacity: 0;
+  }
+
+  span#clear-visible {
+    display: block;
+    color: ghostwhite;
+  }
 }

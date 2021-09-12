@@ -24,6 +24,10 @@ def home():
 
 @views.route("/chat")
 def chat():
+    if "username" not in session:
+        return redirect(url_for("views.home"))
+    elif "username" in session and session["username"] not in connected_users:
+        connected_users.append(session["username"])
     return render_template("chat.html",
                            peoples=connected_users,
                            connected_users=len(connected_users))

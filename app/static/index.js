@@ -3,6 +3,7 @@ const chatBox = document.getElementById("chat-box");
 const sendButton = document.getElementById("send");
 const messages = document.getElementById("messages");
 const peoples = document.getElementById("peoples");
+const showPeoples = document.getElementById("show-peoples");
 let username;
 
 function getTime(utcTime) {
@@ -137,7 +138,7 @@ socket.on("connection_state", (connection_data) => {
   }
 });
 
-sendButton.onclick = () => {
+sendButton.onclick = function () {
   const message = chatBox.value;
   const date = new Date();
   if (message) {
@@ -156,4 +157,11 @@ sendButton.onclick = () => {
     chatBox.value = "";
     messages.appendChild(sendMessageBubble);
   }
+};
+
+showPeoples.onclick = function () {
+  const ul = document.getElementById("nav-links");
+  const clear = document.getElementById("clear");
+  ul.className = "hidden";
+  clear.id = "clear-visible";
 };

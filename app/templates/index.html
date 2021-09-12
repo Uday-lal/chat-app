@@ -1,9 +1,4 @@
 {% extends "base.html" %} {% block content %}
-<style type="text/css">
-  * {
-    overflow: hidden;
-  }
-</style>
 {% for message in get_flashed_messages() %}
   <div class="alert alert-info" role="alert">
     {{message}}
@@ -19,19 +14,27 @@
     class="chat-img"
     src="{{ url_for('static', filename='chat_img.svg') }}"
   />
-  <div class="card">
-    <div class="card-body">
-      <form class="row g-3" method="POST">
-        {{ enter_form.hidden_tag() }}
-        <div class="col-auto">
-          {{ enter_form.username(class="form-control", placeholder="Enter Name")
-          }}
-        </div>
-        <div class="col-auto">
-          {{ enter_form.submit(class="btn btn-primary mb-3") }}
-        </div>
-      </form>
+  <form class="row g-3" method="POST">
+    {{ enter_form.hidden_tag() }}
+    <div class="col-auto">
+      {{ enter_form.username(class="form-control", placeholder="Enter Name")
+      }}
     </div>
-  </div>
+    <div class="col-auto">
+      {{ enter_form.submit(class="btn btn-primary mb-3") }}
+    </div>
+  </form>
 </div>
+<script>
+  function resizeInput() {
+    const enterForm = document.getElementsByName("username")[0];
+    if (window.innerWidth < 614) {
+      enterForm.className = "w-100 form-control";
+    } else {
+      enterForm.className = "form-control";
+    }
+  }
+  window.onload = resizeInput();
+  window.onresize = resizeInput();
+</script>
 {% endblock %}
