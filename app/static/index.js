@@ -4,6 +4,7 @@ const sendButton = document.getElementById("send");
 const messages = document.getElementById("messages");
 const peoples = document.getElementById("peoples");
 const showPeoples = document.getElementById("show-peoples");
+const clear = document.getElementById("clear");
 let username;
 
 function getTime(utcTime) {
@@ -91,9 +92,13 @@ function createMessageBubble(messageData, isSender, utcTime) {
 function insertPeoples(user_data) {
   const li = document.createElement("LI");
   const connectedUsers = document.getElementById("connected-users");
+  const connectedUsersMobile = document.getElementById(
+    "connected-users-mobile"
+  );
   li.className = "people";
   li.id = user_data.username;
   connectedUsers.innerHTML = `${user_data.connected_users} people connected`;
+  connectedUsersMobile.innerHTML = `${user_data.connected_users} people connected`;
   li.innerHTML = user_data.username;
   peoples.appendChild(li);
 }
@@ -101,10 +106,24 @@ function insertPeoples(user_data) {
 function deletePeople(disconnection_data) {
   const peoples = document.getElementById("peoples");
   const connectedUsers = document.getElementById("connected-users");
+  const connectedUsersMobile = document.getElementById(
+    "connected-users-mobile"
+  );
   const disconnectedUser = disconnection_data.username;
   const disconnectUserNode = document.getElementById(disconnectedUser);
   peoples.removeChild(disconnectUserNode);
   connectedUsers.innerHTML = `${disconnection_data.connected_users} peoples connected`;
+  connectedUsersMobile.innerHTML = `${user_data.connected_users} people connected`;
+}
+
+function scrollSmoothToBottom(id) {
+  var div = document.getElementById(id);
+  $("#" + id).animate(
+    {
+      scrollTop: div.scrollHeight - div.clientHeight,
+    },
+    500
+  );
 }
 
 socket.on("receive", (data) => {
@@ -113,6 +132,7 @@ socket.on("receive", (data) => {
     const utcTime = new Date().toUTCString();
     const messageBubble = createMessageBubble(data, false, utcTime);
     messages.appendChild(messageBubble);
+    scrollSmoothToBottom("chat-container");
   }
 });
 
@@ -156,12 +176,26 @@ sendButton.onclick = function () {
     socket.emit("message", msgData);
     chatBox.value = "";
     messages.appendChild(sendMessageBubble);
+    scrollSmoothToBottom("chat-container");
   }
 };
 
 showPeoples.onclick = function () {
   const ul = document.getElementById("nav-links");
-  const clear = document.getElementById("clear");
+  const chatInfo = document.getElementById("connection-info");
+  const chatBoxContainer = document.getElementById("chat-box-container");
   ul.className = "hidden";
-  clear.id = "clear-visible";
+  clear.style = "display: block;color: ghostwhite;";
+  chatInfo.style = `display: block;width: 100vw;overflow: scroll;overflow-x: hidden;overflow-y: scroll;height: 90vh`;
+  chatBoxContainer.style = "display: none;";
+};
+
+clear.onclick = function () {
+  const ul = document.getElementById("nav-links");
+  const chatInfo = document.getElementById("connection-info");
+  const chatBoxContainer = document.getElementById("chat-box-container");
+  ul.classList.remove("hidden");
+  clear.style = "display: none";
+  chatInfo.style = "display: none;";
+  chatBoxContainer.style = null;
 };

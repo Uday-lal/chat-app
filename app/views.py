@@ -33,6 +33,13 @@ def chat():
                            connected_users=len(connected_users))
 
 
+@views.route("/logout")
+def logout():
+    session.pop("username")
+    flash("You are logout")
+    return redirect(url_for("views.home"))
+
+
 @SOCKET_IO.on("message")
 def handle_messages(data):
     emit("receive", data, broadcast=True)

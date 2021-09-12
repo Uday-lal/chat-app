@@ -1,14 +1,14 @@
 {% extends "base.html" %} {% block content %}
-{% for message in get_flashed_messages() %}
-  <div class="alert alert-info" role="alert">
-    {{message}}
-  </div>
-{% endfor %}
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
     <span class="navbar-brand mb-0 h1">Chat App</span>
   </div>
 </nav>
+{% for message in get_flashed_messages() %}
+  <div class="alert alert-info" role="alert">
+    {{message}}
+  </div>
+{% endfor %}
 <div class="center-container">
   <img
     class="chat-img"

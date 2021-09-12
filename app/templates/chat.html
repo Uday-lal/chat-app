@@ -13,6 +13,11 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='chat.css') }}"
     />
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
       integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
@@ -25,12 +30,12 @@
       <div class="nav-content">
         <div>
           <h1>Chat App</h1>
-          <span>{{ connected_users }} people connected</span>
+          <span id="connected-users-mobile">{{ connected_users }} people connected</span>
         </div>
         <span id="clear">Clear</span>
         <ul id="nav-links">
           <li id="show-peoples"><span>Show Peoples</span></li>
-          <li><a href="#">Logout</a></li>
+          <li><a href="{{ url_for('views.logout') }}">Logout</a></li>
         </ul>
       </div>
     </nav>
