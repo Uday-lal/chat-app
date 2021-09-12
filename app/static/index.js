@@ -3,24 +3,25 @@ const chatBox = document.getElementById("chat-box");
 const sendButton = document.getElementById("send");
 const messages = document.getElementById("messages");
 const peoples = document.getElementById("peoples");
-const date = new Date();
 let username;
 
-function getTime() {
+function getTime(utcTime) {
+  const date = new Date(utcTime);
   const hours = date.getHours();
   const minutes = date.getMinutes() < 10 ? "00" : date.getMinutes();
   const time = `${hours}:${minutes}`;
   return time;
 }
 
-function getDate() {
+function getDate(utcTime) {
+  const date = new Date(utcTime);
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 }
 
-function createMessageBubble(messageData, isSender) {
+function createMessageBubble(messageData, isSender, utcTime) {
   const msg = document.createElement("DIV");
   const msgHeader = document.createElement("DIV");
   const msgBody = document.createElement("DIV");
@@ -48,7 +49,8 @@ function createMessageBubble(messageData, isSender) {
 
   // Setting body properties
   date.className = "date";
-  date.innerHTML = messageData.date === getDate() ? "Today" : messageData.date;
+  date.innerHTML =
+    messageData.date === getDate(utcTime) ? "Today" : messageData.date;
   message.className = "msg";
   message.innerHTML = messageData.message;
   if (isSender) {
@@ -89,7 +91,8 @@ function deletePeople(disconnection_data) {
 socket.on("receive", (data) => {
   const senderName = data.username;
   if (senderName !== username) {
-    const messageBubble = createMessageBubble(data, false);
+    const utcTime = new Date().toUTCString();
+    const messageBubble = createMessageBubble(data, false, utcTime);
     messages.appendChild(messageBubble);
   }
 });
@@ -118,17 +121,19 @@ socket.on("connection_state", (connection_data) => {
 
 sendButton.onclick = () => {
   const message = chatBox.value;
-  sendButton.className = "button-click";
+  const date = new Date();
   if (message) {
-    const time = getTime();
-    const date = getDate();
+    const utcTime = date.toUTCString();
+    const currentDate = getDate(utcTime);
+    const time = getTime(utcTime);
     const msgData = {
       message: message,
       username: username,
+      date_time: utcTime,
+      date: currentDate,
       time: time,
-      date: date,
     };
-    const sendMessageBubble = createMessageBubble(msgData, true);
+    const sendMessageBubble = createMessageBubble(msgData, true, utcTime);
     socket.emit("message", msgData);
     chatBox.value = "";
     messages.appendChild(sendMessageBubble);

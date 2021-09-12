@@ -35,9 +35,11 @@ def chat():
 def handle_messages(data):
     username = data["username"]
     message = data["message"]
-    chat = Chat(username=username, message=message)
+    date_time = data["date_time"]
+    chat = Chat(username=username, message=message, date=date_time)
     DB.session.add(chat)
     DB.session.commit()
+    print(Chat.query.all())
     emit("receive", data, broadcast=True)
 
 
