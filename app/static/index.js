@@ -21,6 +21,23 @@ function getDate(utcTime) {
   return `${day}/${month}/${year}`;
 }
 
+function removeHTML(message) {
+  if (message.includes("<") || message.includes(">")) {
+    const lt = "&lt;";
+    const gt = "&gt;";
+    while (true) {
+      if (message.includes("<")) {
+        message = message.replace("<", lt);
+      } else if (message.includes(">")) {
+        message = message.replace(">", gt);
+      } else {
+        break;
+      }
+    }
+  }
+  return message;
+}
+
 function createMessageBubble(messageData, isSender, utcTime) {
   const msg = document.createElement("DIV");
   const msgHeader = document.createElement("DIV");
@@ -29,6 +46,7 @@ function createMessageBubble(messageData, isSender, utcTime) {
   const date = document.createElement("SPAN");
   const usernameSpan = document.createElement("SPAN");
   const message = document.createElement("SPAN");
+  const innerMessage = removeHTML(messageData.message);
   msg.className = isSender ? "send-message message" : "receive-message message";
   msgHeader.className = "msg-header";
   msgBody.className = "msg-body";
@@ -52,7 +70,7 @@ function createMessageBubble(messageData, isSender, utcTime) {
   date.innerHTML =
     messageData.date === getDate(utcTime) ? "Today" : messageData.date;
   message.className = "msg";
-  message.innerHTML = messageData.message;
+  message.innerHTML = innerMessage;
   if (isSender) {
     msgBody.appendChild(date);
     msgBody.appendChild(message);
