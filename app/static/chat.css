@@ -23,7 +23,6 @@ div#chat-container {
   background-color: black;
   position: relative;
   overflow: scroll;
-  /* overflow-x: hidden; */
   overflow-y: scroll;
   height: 86vh;
 }
