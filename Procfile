@@ -1,1 +1,1 @@
-web: gunicorn app:app cors_allowed_origins
+web:gunicorn --worker-class eventlet -w 1 app:app
