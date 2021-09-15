@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn app:app cors_allowed_origins
