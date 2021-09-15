@@ -1,5 +1,5 @@
-from app import start_app
-from app import APP
+from website import start_app
+from website import APP
 
 app = start_app()
 
