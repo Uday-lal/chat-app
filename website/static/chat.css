@@ -14,6 +14,7 @@ div.grid {
 
 span#clear {
   display: none;
+  cursor: pointer;
 }
 
 div#connection-info {
@@ -170,6 +171,7 @@ span.date {
 
 li#show-peoples {
   display: none;
+  cursor: pointer;
 }
 
 @media (max-width: 765px) {

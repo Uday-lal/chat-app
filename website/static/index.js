@@ -113,7 +113,7 @@ function deletePeople(disconnection_data) {
   const disconnectUserNode = document.getElementById(disconnectedUser);
   peoples.removeChild(disconnectUserNode);
   connectedUsers.innerHTML = `${disconnection_data.connected_users} peoples connected`;
-  connectedUsersMobile.innerHTML = `${user_data.connected_users} people connected`;
+  connectedUsersMobile.innerHTML = `${disconnection_data.connected_users} people connected`;
 }
 
 function scrollSmoothToBottom(id) {
