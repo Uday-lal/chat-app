@@ -2,7 +2,7 @@
 
 Simple Chat app using flask and flask-socketio.
 
-Play with the application here -> https://clap-chat.herokuapp.com/
+Play with the application here -> https://chat-app-ffdk.onrender.com/
 
 ## APP Screen Shots
 
